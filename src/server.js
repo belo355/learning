@@ -1,2 +1,5 @@
 const app = require('../src/app'); 
-app.listen(3333); 
+const logSymbols = require('log-symbols'); 
+
+app.listen(3333);
+console.log(logSymbols.success, 'start application'); 
