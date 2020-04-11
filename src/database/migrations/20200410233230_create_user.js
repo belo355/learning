@@ -2,6 +2,7 @@ exports.up = function(knex) {
   return knex.schema.createTable('user',function(table){
       table.string('id').primary(); 
       table.string('name').notNullable(); 
+      table.string('nick').notNullable().unique(); 
       table.string('adress').notNullable(); 
       table.string('city').notNullable(); 
       table.string('uf').notNullable(); 

@@ -1,15 +1,19 @@
 const express = require('express'); 
 const routes = express.Router(); 
 
-// const HelloController= require('../src/controllers/HelloController'); 
 const UserController= require('../src/controllers/UserController'); 
+const SessionController = require('../src/controllers/SessionController'); 
+const SchoolController = require('../src/controllers/SchoolController'); 
 
 routes.get('/users',UserController.index); 
 routes.post('/users', UserController.create); 
-routes.put('/users/:id', UserController.update); 
+routes.delete('/users/delete/:id',UserController.delete); 
 
+routes.get('/session/', UserController.index); 
 
-//todo: add logger de request
-//ajustar request.update 
+routes.get('/school', SchoolController.index); 
+routes.post('/school', SchoolController.create); 
+routes.put('/school/:id', SchoolController.update); 
+
 
 module.exports = routes; 

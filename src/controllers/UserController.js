@@ -1,47 +1,46 @@
-const {uuid} = require('uuidv4'); 
-const connection = require('../database/connections'); 
+const { uuid } = require("uuidv4");
+const connection = require("../database/connections");
+// const loggerRequest = require('../../src/util/LoggerRequest');
 
 module.exports = {
-  async index(request, response){
-  const users = await connection('user').select('*'); 
-  return response.json({users});
+  async index(request, response) {
+    const users = await connection("user").select("*");
+    return response.json({ users });
+  },
 
-  },   
-  
-  async create(request, response){
-  const {name, adress, city, uf} = request.body; 
+  // TODO: fazer funcionar
+  // async indexFindOne(request, response){
+  //     const id = request.params;
+  //     const user = await connection('user').select('*').where('id',id).first();
 
-  const id = uuid(); 
-  const [user] = await connection('user').insert({
-    id, 
-    name, 
-    adress, 
-    city, 
-    uf, 
-    }); 
-    return response.json({user}); 
-  }, 
+  //     return response.json({user});
+  //   },
 
-  async update(request, response){
-  const id = request.params; 
-  const  { name, adress, city, uf } = request.body; 
-  
-    const user = await connection('user')
-    .select('*')
-    .where('id',id); 
+  async create(request, response) {
+    const { name, nick,  adress, city, uf } = request.body;
 
-    if(user.id !== id){
-      return response.status(404).json('User not found'); 
+    const id = uuid();
+    const [user] = await connection("user").insert({
+      id,
+      name,
+      nick, 
+      adress,
+      city,
+      uf,
+    });
+    return response.json({ user });
+  },
+
+
+  async delete(request, response) {
+    const { id } = request.params;
+
+    const user = await connection('user').where('id', id).select('*').fist();
+
+    if (user.id !== id) {
+      return response.status(404).json({ error: 'ID not found' });
     }
-
-    const updateUser = await connection('user').inser({
-    id, 
-    name, 
-    adress, 
-    city, 
-    uf, 
-    }); 
-
-    return response.json({updateUser}); 
+    await connetion("user").where(id).delete();
+    return response.status(204).send();
   }
-}
+} 

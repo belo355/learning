@@ -1,5 +1,6 @@
 const app = require('../src/app'); 
 const logSymbols = require('log-symbols'); 
+const port = 3333; 
 
-app.listen(3333);
-console.log(logSymbols.success, 'start application'); 
+app.listen(port);
+console.log(logSymbols.success, 'start application in port', port); 
