@@ -1,0 +1,55 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe D:\Program Files (x86)\Yarn\bin\yarn.js init
+
+PATH: 
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\edils\bin;C:\Program Files\AdoptOpenJDK\jdk-11.0.4.11-hotspot\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Utilities 1.6;C:\Program Files (x86)\Java\jdk1.8.0_211;D:\Users\Edilson\flutter\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs;D:\Program Files (x86)\Yarn\bin;C:\Users\edils\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Java\jdk1.8.0_211\bin;C:\Users\edils\eclipse\jee-2019-06\eclipse;D:\Users\edils\AppData\Local\Programs\Microsoft VS Code\bin;D:\Users\Edilson\flutter\bin;C:\Users\edils\AppData\Roaming\npm;C:\Users\edils\AppData\Local\Yarn\bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  12.16.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (D:\Program Files (x86)\Yarn\lib\cli.js:137008:13)
+      at Interface.emit (events.js:311:20)
+      at Interface._ttyWrite (readline.js:893:16)
+      at ReadStream.onkeypress (readline.js:198:10)
+      at ReadStream.emit (events.js:311:20)
+      at emitKeys (internal/readline/utils.js:438:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1160:36)
+      at ReadStream.emit (events.js:311:20)
+      at addChunk (_stream_readable.js:294:12)
+
+npm manifest: 
+  {
+    "name": "learning",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "nodemon src/server.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "cors": "^2.8.5",
+      "express": "^4.17.1",
+      "knex": "^0.20.13",
+      "log-symbols": "^3.0.0",
+      "sqlite3": "^4.1.1",
+      "uuidv4": "^6.0.7"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

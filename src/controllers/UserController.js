@@ -3,44 +3,57 @@ const connection = require("../database/connections");
 // const loggerRequest = require('../../src/util/LoggerRequest');
 
 module.exports = {
-  async index(request, response) {
+  async index(req, res) {
     const users = await connection("user").select("*");
-    return response.json({ users });
+    return res.json({ users });
   },
 
-  // TODO: fazer funcionar
-  // async indexFindOne(request, response){
-  //     const id = request.params;
-  //     const user = await connection('user').select('*').where('id',id).first();
-
-  //     return response.json({user});
-  //   },
-
-  async create(request, response) {
-    const { name, nick,  adress, city, uf } = request.body;
+  async create(req, res) {
+    const { name, adress, city, uf } = req.body;
 
     const id = uuid();
     const [user] = await connection("user").insert({
       id,
       name,
-      nick, 
       adress,
       city,
       uf,
     });
-    return response.json({ user });
+    return res.json({ user });
   },
 
+  async update(req, res){
+      const {id} = req.query; 
+      const { name } = req.body; 
+     
+      const user = await connection('user')
+      .select('*').where('id',id).first(); 
+      console.log(user); 
+      console.log('INFO REQ  >>>>>>>>>> '); 
+      console.log(id); 
+      console.log(name); 
 
-  async delete(request, response) {
-    const { id } = request.params;
+      if(!user.id){
+        return res.status(404).json({error:"not found"}); 
+      }
 
-    const user = await connection('user').where('id', id).select('*').fist();
+      const userInsert = await connection('user')
+        .where('id',id)
+        .update({
+            "name":name
+          }); 
+      return res.json({userInsert}); 
+  }, 
 
-    if (user.id !== id) {
-      return response.status(404).json({ error: 'ID not found' });
+  async delete(req, res) {
+    const {id} = req.query; 
+
+    try {
+      await connection('user').where('id', id).delete(); 
+    } catch (error) {
+      return res.status(404).json({error:"not found"}); 
     }
-    await connetion("user").where(id).delete();
-    return response.status(204).send();
+    
+    return res.status(204).send();
   }
 } 
