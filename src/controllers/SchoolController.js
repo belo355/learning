@@ -1,9 +1,9 @@
-const connection = require("../database/connections");
 const { uuid } = require("uuidv4");
+const connection = require("../database/connections");
 
 module.exports = {
   async index(request, response) {
-    const school = await connection("schools").select("*");
+    const school = await connection('school').select('*');
     return response.json({ school });
   },
   
@@ -11,7 +11,7 @@ module.exports = {
     const { name, adress, city, uf, level } = request.body;
 
     const id = uuid();
-    const [school] = await connection("schools").insert({
+    const [school] = await connection('school').insert({
       id,
       name,
       adress,
@@ -23,26 +23,33 @@ module.exports = {
   }, 
 
   async update(request, response){
-    const { id } = request.params; 
+    const { id } = request.query; 
     const { name, adress, city, uf, level } = request.body; 
+    
+    const school = await connection('school').select('id').where('id', id).first();
 
-    const findSchool = await connection("schools").select("*").where('id', id);
-
-    if(findSchool.id !==  id){
-      return reponse.status(404).json({error: 'not found'}); 
+    if(school.id !== id){
+      return response.status(404).json({error: 'not found'}); 
     }
 
-    const school = await connection('school').insert({
-      id, 
-      name, 
-      adress, 
-      city, 
-      uf, 
-      level
+    const updateSchool = await connection('school').where('id',id).update({
+      name:name, 
+      adress:adress, 
+      city:city, 
+      uf:uf, 
+      level:level, 
     }); 
+    return response.status(200).json({updateSchool}); 
+  }, 
+  async delete(request, response){
+    const {id} = request.query; 
 
-    return response.status(200).json({school}); 
-    
+    try {
+      await connection('school').where('id', id).delete();  
+    } catch (error) {
+      return response.status(404).json({ error: "not found" });
+    }
+    return response.status(204).send(); 
+
   }
-
 }

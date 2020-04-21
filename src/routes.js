@@ -9,9 +9,10 @@ routes.post('/users', UserController.create);
 routes.put('/users/update/', UserController.update); 
 routes.delete('/users/delete/', UserController.delete); 
 
-routes.get('/school', SchoolController.index); 
-routes.post('/school', SchoolController.create); 
-routes.put('/school/:id', SchoolController.update); 
+routes.get('/schools', SchoolController.index); 
+routes.post('/schools', SchoolController.create); 
+routes.put('/school/update/', SchoolController.update); 
+routes.delete('/school/delete/', SchoolController.delete); 
 
 
 module.exports = routes;  

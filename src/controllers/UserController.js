@@ -3,57 +3,50 @@ const connection = require("../database/connections");
 // const loggerRequest = require('../../src/util/LoggerRequest');
 
 module.exports = {
-  async index(req, res) {
+  async index(request, response) {
     const users = await connection("user").select("*");
-    return res.json({ users });
+    return response.json({ users });
   },
 
-  async create(req, res) {
-    const { name, adress, city, uf } = req.body;
+  async create(request, response) {
+    const { name, adress, city, uf } = request.body;
 
     const id = uuid();
-    const [user] = await connection("user").insert({
+    const [user] = await connection('user').insert({
       id,
       name,
       adress,
       city,
       uf,
     });
-    return res.json({ user });
+    return response.json({ user }); //TODO: melhorar responsta da api 
   },
 
-  async update(req, res){
-      const {id} = req.query; 
-      const { name } = req.body; 
-     
-      const user = await connection('user')
-      .select('*').where('id',id).first(); 
-      console.log(user); 
-      console.log('INFO REQ  >>>>>>>>>> '); 
-      console.log(id); 
-      console.log(name); 
+  async update(request, response) {
+    const { id } = request.query;
+    const { name } = request.body;
 
-      if(!user.id){
-        return res.status(404).json({error:"not found"}); 
-      }
+    const user = await connection('user').select('*').where('id', id).first();
 
-      const userInsert = await connection('user')
-        .where('id',id)
-        .update({
-            "name":name
-          }); 
-      return res.json({userInsert}); 
-  }, 
+    if (!user.id) {
+      return response.status(404).json({ error: "not found" });
+    }
 
-  async delete(req, res) {
-    const {id} = req.query; 
+    const userUpdate = await connection('user').where('id', id).update({
+      name: name,
+    });
+    return response.json({ userUpdate });
+  },
+
+  async delete(request, response) {
+    const { id } = request.query;
 
     try {
-      await connection('user').where('id', id).delete(); 
+      await connection('user').where('id', id).delete();
     } catch (error) {
-      return res.status(404).json({error:"not found"}); 
+      return response.status(404).json({ error: "not found" });
     }
-    
-    return res.status(204).send();
-  }
-} 
+
+    return response.status(204).send();
+  },
+};
