@@ -41,8 +41,26 @@ module.exports = {
     }); 
     return response.status(200).json({updateSchool}); 
   }, 
+  
   async delete(request, response){
     const {id} = request.query; 
+
+    try {
+      await connection('school').where('id', id).delete();  
+    } catch (error) {
+      return response.status(404).json({ error: "not found" });
+    }
+    return response.status(204).send(); 
+
+  }, 
+    
+  //TODO: melhorar
+  async evaluation(request, response){
+    const { id } = request.query; 
+    const { score , comments} = request.body; 
+
+    const school = await connection('school').select('id').where('id', id).first();
+
 
     try {
       await connection('school').where('id', id).delete();  

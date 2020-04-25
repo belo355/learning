@@ -19,7 +19,7 @@ module.exports = {
       city,
       uf,
     });
-    return response.json({ user }); //TODO: melhorar responsta da api 
+    return response.json({ user }); //TODO: melhorar resposta da api 
   },
 
   async update(request, response) {
