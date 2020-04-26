@@ -62,5 +62,6 @@ module.exports = {
     } catch (error) {
      response.status(400).json({error: "command error, not permission"}); 
     }
+    response.status(200).send(); 
   }
 }

@@ -18,7 +18,7 @@ routes.delete('/school/delete/', SchoolController.delete);
 
 routes.get('/favorite', FavoriteController.index);
 routes.post('/favorite', FavoriteController.create);
-// routes.delete('/favorite/delete/', FavoriteController.delete);
+routes.delete('/favorite', FavoriteController.delete);
 
 routes.get('/evaluation', EvaluationController.index); 
 routes.post('/evaluation', EvaluationController.create); 
