@@ -29,7 +29,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-O Learning é um projeto que visa conectar pessoal que procuram por uma instiuição de qualidade para seus filhos. 
+O Learning é um projeto que visa conectar possoas/responsaveis que procuram por uma instiuição de ensino de qualidade para seus filhos. 
 
 ## 🔖 Layout
 
