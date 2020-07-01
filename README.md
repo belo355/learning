@@ -1,7 +1,7 @@
 
 
 <h4 align="center">
-  🚀 PROJETO FINAL MBA - GESTÃO DE PROJETOS EM TI
+  🚀 PROJETO FINAL MBA - GESTÃO DE PROJETOS EM TI - FIAP
 </h4>
 
 
